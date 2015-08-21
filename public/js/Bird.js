@@ -13,8 +13,8 @@ var Bird = function(app) {
     bird.createMainBird = function(d) {
 
     	bird.id = d.id;
-    	bird.xPosition = 30;
-    	bird.yPosition = 30;
+    	bird.xPosition = 10;
+    	bird.yPosition = 10;
     	bird.name = d.name;
     	bird.color = d.color;
     	bird.direction = d.direction;
@@ -27,8 +27,7 @@ var Bird = function(app) {
     	$('#'+birdID+' .circle').css('background-color', bird.color );
 		$('#'+birdID+' .triangle').css('border-bottom-color', bird.color );
 
-		TweenMax.to( figure, 0.3, {rotation:90});
-
+		TweenMax.to( figure, 0.3, {rotation:bird.direction, left:bird.xPosition, top:bird.yPosition});
     } 
 
     bird.createBird = function(d) {
@@ -40,19 +39,27 @@ var Bird = function(app) {
     	bird.color = d.color;
     	bird.direction = d.direction;
 
+    	// console.log(bird.xPosition);
+    	// console.log(bird.yPosition);
+
     	var birdID="bird-"+bird.id;
-    	$('#canvas').append('<div class="bird" id="'+birdID+'"><div class="circle"></div><div class="triangle"></div></div>');
+    	$('#users').append('<div class="bird" id="'+birdID+'"><div class="circle"></div><div class="triangle"></div></div>');
 
     	figure = $('#'+birdID);
 
     	$('#'+birdID+' .circle').css('background-color', bird.color );
 		$('#'+birdID+' .triangle').css('border-bottom-color', bird.color );
 
-		TweenMax.to( figure, 0.3, {rotation:bird.direction, top:bird.xPosition, left:bird.yPosition});
+		// TweenMax.to( figure, 0.3, {rotation:bird.direction, left:bird.xPosition, top:bird.yPosition});
+
+		TweenMax.to( figure, 0.3, {rotation:bird.direction} );
+		figure.css('left', bird.xPosition);
+		figure.css('top', bird.yPosition);
+
     } 
 
     bird.updatePosition = function(d) {
-
+    	TweenMax.to( figure, 0.3, {rotation:bird.direction, left:bird.xPosition, top:bird.yPosition});
     }
 
     bird.updatePositionByKey = function(d,a) {
