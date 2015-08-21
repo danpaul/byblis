@@ -130,3 +130,51 @@ body {
 	-moz-box-shadow: 0px -3px 10px 0.3px rgba(47,38,155,1);
 	box-shadow: 0px -3px 10px 0.3px rgba(47,38,155,1);
 }
+.tree {
+	width: 20px;
+	height: 40px;
+	position: absolute;
+	top: 300px;
+	left: 100px;
+}
+.tree .leaf1 {
+	width: 20px;
+	height: 20px;
+	background-color: #05824c;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	position: absolute;
+	top: 10px;
+	left: 6px;
+}
+.tree .leaf2 {
+	width: 20px;
+	height: 20px;
+	background-color: #06a45f;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	position: absolute;
+	top: 8px;
+	left: -5px;
+}
+.tree .leaf3 {
+	width: 15px;
+	height: 15px;
+	background-color: #50ac47;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	position: absolute;
+	top: 0px;
+	left: 4px;
+}
+.tree .branch {
+	width: 4px;
+	height: 20px;
+	background-color: #a3632f;
+	position: absolute;
+	top: 20px;
+	left: 8px;
+}

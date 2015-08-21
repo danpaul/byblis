@@ -5,8 +5,10 @@ var Model = function() {
     model.mainBird = null;
 
     model.birds=[];
+    model.bombs=[];
 
     model.bombcount=0;
+    model.treecount=0;
 
 	// (function(){	
 	// })();

@@ -70,10 +70,14 @@ var Control = function(a, s) {
 	            	}
 	            }
 
-	            // var b = data.gameState.bombs 
-	            // {
-	            // 	var b = new Bomb();
-	            // }
+	            var b = data.gameSate.bombs;
+	            for( var j=0; j<b.length; j++ )
+	            {
+	            	var b = new Bomb(app);
+	            	b.otherUserCreateBomb(b[j]);
+
+	            	app.model.bombs.push(b);
+	            }
 	        }
 
 			// data will looks like this:

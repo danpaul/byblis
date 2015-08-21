@@ -32,8 +32,11 @@ var App = function(s) {
 		switch(e.keyCode)
         {
             case(91):
-                // new Bomb(app);
-                app.control.placeBomb( app.model.mainBird.xPosition, app.model.mainBird.yPosition);
+                // app.control.placeBomb( app.model.mainBird.xPosition, app.model.mainBird.yPosition);
+
+                var b = new Bomb(app);
+                b.userCreateBomb({id:app.model.bombcount, xPosition:0, yPosition:0});
+                app.model.bombcount++;
             break;
             case(18):
                 new Tree(app);
