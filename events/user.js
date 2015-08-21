@@ -81,11 +81,11 @@ module.exports = function(data){
             callback
 
     */
-    socket.on('userPlaceBomb', function(data){
-        var userId = this.getUserId(socket);
-        if( userId === null ){ return; }
-        
-
-
-    })
+    // socket.on('userPlaceBomb', function(data){
+    //     data.userId = this.getUserId(socket);
+    //     if( userId === null ){ return; }
+    //     data.bombExplosionTime = function(){
+    //         bombManager.
+    //     }
+    // })
 }
