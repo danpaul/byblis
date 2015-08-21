@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
+    "node-uuid": "^1.4.3",
+    "sillyname": "0.0.3",
     "socket.io": "^1.3.6"
   }
 }
