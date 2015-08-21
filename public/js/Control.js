@@ -15,10 +15,17 @@ var Control = function(a, s) {
 		socket.emit('userUpdatePostion', app.model.mainBird);
 	}
 
-	socket.on('userUpdatePostion', function (data) {
+	socket.on('userUpdatePosition', function (data) {
 	   // data is user object
 	   console.log(data);
 	});
+
+	control.userDisconnect = function()
+	{
+		socket.emit('userDisconnect', {userId: userId});
+	}
+	
+	// socket.on('userPlaceBomb', {xPosition: ..., yPosition});
 
     socket.on('connect', function (data) {
         console.log('in connect event');
@@ -31,21 +38,21 @@ var Control = function(a, s) {
             console.log(data);
 
             if( init == false )
-            {        	
+            {         	
 	            var b = new Bird(app);
 	            b.createMainBird(data.user);
 	            app.model.mainBird = b;
 
 	            init = true;
-            }
 
-            var u = data.gameSate.users;
+	            var u = data.gameSate.users;
 
-            for( var i=0; i<u.length; i++ )
-            {
-            	var otherBird = new Bird(app);
-            	otherBird.createBird(u[i]);
-            }
+	            for( var i=0; i<u.length; i++ )
+	            {
+	            	var otherBird = new Bird(app);
+	            	otherBird.createBird(u[i]);
+	            }
+	        }
 
 			// data will looks like this:
 			// {  
