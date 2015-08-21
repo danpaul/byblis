@@ -6,9 +6,6 @@ var App = function(s) {
     app.socket = s;
 	app.model = new Model();
 	app.control = new Control(app, app.socket);
-	app.bird = new Bird();
-
-	model.mainBird = app.bird;
 	
 	canvas = $('#canvas');
 
@@ -17,16 +14,16 @@ var App = function(s) {
 		switch(e.keyCode) 
 		{
 			case(37):
-    			bird.updatePositionByKey('x',-25);
+    			app.model.mainBird.updatePositionByKey('x',-25);
     		break;
     		case(38):
-    			bird.updatePositionByKey('y',-25);
+    			app.model.mainBird.updatePositionByKey('y',-25);
     		break;
     		case(39):
-    			bird.updatePositionByKey('x',25);
+    			app.model.mainBird.updatePositionByKey('x',25);
     		break;
     		case(40):
-    			bird.updatePositionByKey('y',25);
+    			app.model.mainBird.updatePositionByKey('y',25);
     		break;
 		}
 	}
