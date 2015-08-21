@@ -10,6 +10,23 @@ $(document).ready(function(){
         document.addEventListener('keydown', app.keydown, false);
    }
 
+
+// socket.emit('userUpdatePostion', userObject);
+
+//  socket.on('connect', function (data) {
+//         // console.log('in connect event');
+//         socket.emit('userInit', function(err, data){
+
+//             if( err ){
+// console.log(4)
+//                 console.log('Error: ', err);
+//                 return;
+//             }
+// console.log(data)
+//         });
+//     });
+
+
    startApp();
 
 });
