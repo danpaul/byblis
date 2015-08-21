@@ -4,6 +4,10 @@ var Model = function() {
     
     model.mainBird = null;
 
+    birds=[];
+
+    model.bombcount=0;
+
 	// (function(){	
 	// })();
 

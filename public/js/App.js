@@ -32,10 +32,10 @@ var App = function(s) {
 		switch(e.keyCode)
         {
             case(91):
-                new Bomb(app.model, app);
+                new Bomb(app);
             break;
             case(18):
-                new Tree(app.model, app);
+                new Tree(app);
             break;
         }
 	}
