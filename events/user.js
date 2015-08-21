@@ -3,6 +3,12 @@ var bombManager = require('../lib/user_manager');
 
 var _ = require('underscore');
 
+// returns true if collision
+var collisionDetection = function(x1, y1, x2, y2, radius){
+    return false;
+
+}
+
 module.exports = function(data){
 
     var socket = data.socket;
@@ -18,6 +24,24 @@ module.exports = function(data){
             }
         })
         return userId;
+    }
+
+    this.getUser = function(userId){
+        var user = null;
+        _.each(gameSate.user, function(u){
+            if(u.id === userId){
+                user = u;
+            }
+        });
+        return user;
+    }
+
+    this.userDies = function(userId){
+        socket.emit('userDies', {userId: userId});
+    }
+
+    this.updatePoints = function(userId, points){
+        socket.emit('userUpdatePoints', {userId: userId, points: points});
     }
 
     socket.on('userInit', function(callback){
@@ -41,6 +65,10 @@ module.exports = function(data){
     });
 
     socket.on('userUpdatePostion', function(userObject){
+
+
+console.log('updating position', userObject.xPosition, userObject.yPosition);
+
         socket.broadcast.emit('userUpdatePosition', userObject);
     });
 
@@ -65,12 +93,6 @@ module.exports = function(data){
             return user.id !== userId;
         })
 
-        // console.log('Setting new socket map', newSocketMap.length);
-        // console.log('num users', gameSate.users.length);
-        // console.log('User left: ', userId);
-
-        // console.log('emitting disconnect');
-
         socket.broadcast.emit('userDisconnect', {userId: userId});
     });
 
@@ -78,14 +100,43 @@ module.exports = function(data){
         Requires:
             data.xPosition
             data.yPosition
-            callback
-
     */
     socket.on('userPlaceBomb', function(data){
-        data.userId = this.getUserId(socket);
+
+        var self = this;
+
+        var userId = this.getUserId(socket);
         if( userId === null ){ return; }
-        data.bombExplosionTime = function(){
-            // bombManager.
-        }
+
+        data.userId = userId;
+
+        var user = this.getUser(userId);
+        var bomb = bombManager.create(data);
+
+        userManager.updatePoints(user,
+                                 config.pointsPlantBomb,
+                                 this.userDies,
+                                 this.updatePoints);
+
+        socket.emit('userPlaceBomb', bomb);
+
+        setTimeout(function(){
+            socket.emit('bombExploded', {id: bomb.id});
+            // iterate through all users and see if any have collision
+            _.each(gameSate.users, function(u){
+                if(u.id === userId){ return; }
+                if( collisionDetection(u.xPosition,
+                                       u.yPosition,
+                                       bomb.xPosition,
+                                       bomb.yPosition,
+                                       config.explosionRadius) ){
+
+                    self.updatePoints(u,
+                                      config.pointsHitBomb,
+                                      self.userDies,
+                                      self.userUpdatePoints);
+                }
+            });
+        }, config.bombExplosionTime);
     })
 }
