@@ -15,14 +15,16 @@ var Control = function(a, s) {
 		socket.emit('userUpdatePostion', app.model.mainBird);
 	}
 
-    // data.xPosition
-    // data.yPostion
-    socket.on('userPlaceBomb', function(data){
+	control.placeBomb = function(x,y) {
+		//console.log(x);
+		socket.emit('userPlaceBomb', {xPosition:x, yPostion:y});
+	}
 
-    console.log(data)
-
-
-    })
+	socket.on('userPlaceBomb', function(data){
+		console.log(data);
+		var b = new Bomb(app);
+		b.userCreateBomb(data);
+	})
 
 	socket.on('userUpdatePosition', function (data) {
 	   // data is user object
@@ -67,6 +69,11 @@ var Control = function(a, s) {
 		            	app.model.birds.push(otherBird);
 	            	}
 	            }
+
+	            // var b = data.gameState.bombs 
+	            // {
+	            // 	var b = new Bomb();
+	            // }
 	        }
 
 			// data will looks like this:

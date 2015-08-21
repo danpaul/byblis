@@ -32,7 +32,8 @@ var App = function(s) {
 		switch(e.keyCode)
         {
             case(91):
-                new Bomb(app);
+                // new Bomb(app);
+                app.control.placeBomb( app.model.mainBird.xPosition, app.model.mainBird.yPosition);
             break;
             case(18):
                 new Tree(app);
