@@ -15,6 +15,11 @@ var Control = function(a, s) {
 		socket.emit('userUpdatePostion', app.model.mainBird);
 	}
 
+	socket.on('userUpdatePostion', function (data) {
+	   // data is user object
+	   console.log(data);
+	});
+
     socket.on('connect', function (data) {
         console.log('in connect event');
         socket.emit('userInit', function(err, data){
@@ -35,7 +40,6 @@ var Control = function(a, s) {
             }
 
             var u = data.gameSate.users;
-
 
             for( var i=0; i<u.length; i++ )
             {
