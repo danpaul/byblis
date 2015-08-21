@@ -29,4 +29,19 @@ $(document).ready(function(){
 
    startApp();
 
+    setInterval(function(){
+
+        _.each(app.model.birds, function(bird){
+
+            // console.log(bird);
+
+        })
+
+    }, 1000);
+
+
+
+// console.log('asdf')
+// console.log(app.model.birds);
+
 });

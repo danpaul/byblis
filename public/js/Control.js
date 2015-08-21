@@ -15,6 +15,15 @@ var Control = function(a, s) {
 		socket.emit('userUpdatePostion', app.model.mainBird);
 	}
 
+    // data.xPosition
+    // data.yPostion
+    socket.on('userPlaceBomb', function(data){
+
+    console.log(data)
+
+
+    })
+
 	socket.on('userUpdatePosition', function (data) {
 	   // data is user object
 	   // console.log(data);

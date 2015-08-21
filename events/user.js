@@ -5,8 +5,10 @@ var _ = require('underscore');
 
 // returns true if collision
 var collisionDetection = function(x1, y1, x2, y2, radius){
-    return false;
-
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+    var distance = Math.sqrt(dx*dx + dy*dy);
+    return(distance < radius);
 }
 
 module.exports = function(data){
@@ -65,10 +67,6 @@ module.exports = function(data){
     });
 
     socket.on('userUpdatePostion', function(userObject){
-
-
-console.log('updating position', userObject.xPosition, userObject.yPosition);
-
         socket.broadcast.emit('userUpdatePosition', userObject);
     });
 
@@ -96,12 +94,15 @@ console.log('updating position', userObject.xPosition, userObject.yPosition);
         socket.broadcast.emit('userDisconnect', {userId: userId});
     });
 
+
     /**
         Requires:
             data.xPosition
             data.yPosition
     */
     socket.on('userPlaceBomb', function(data){
+
+        console.log('placing bomb');
 
         var self = this;
 
