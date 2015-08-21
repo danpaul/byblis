@@ -8,13 +8,13 @@ $(document).ready(function(){
     });
 
     socket.on('connect', function (data) {
+
         console.log('in connect event');
         socket.emit('userInit', function(err, data){
             if( err ){
                 console.log('Error: ', err);
                 return;
             }
-
 
 // data will looks like this:
 // {  
@@ -42,3 +42,16 @@ $(document).ready(function(){
 
     });
 });
+
+ socket.on('connect', function (data) {
+        console.log('in connect event');
+        socket.emit('userInit', function(err, data){
+
+            if( err ){
+console.log(4)
+                console.log('Error: ', err);
+                return;
+            }
+console.log(data)
+        });
+    });

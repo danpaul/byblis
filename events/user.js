@@ -18,7 +18,7 @@ module.exports = function(data){
         });
 
         // add to user array
-        gameSate.users.push;
+        gameSate.users.push(user);
 
         // pass back user data
         callback(null, {user: user, gameSate: gameSate});
