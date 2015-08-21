@@ -17,15 +17,14 @@ var Control = function(a, s) {
 
 	socket.on('userUpdatePosition', function (data) {
 	   // data is user object
-	   console.log(data);
+	   // console.log(data);
 		$('#bird-' + data.id).css('left', data.xPosition);
 		$('#bird-' + data.id).css('top', data.yPosition);
 	});
 
-	// control.userDisconnect = function()
-	// {
-	// 	socket.emit('userDisconnect', {userId: userId});
-	// }
+	socket.on('userDisconnect', function (data) {	   
+		$('#bird-' + data.userId).remove();
+	});
 	
 	// socket.on('userPlaceBomb', {xPosition: ..., yPosition});
 
@@ -51,10 +50,13 @@ var Control = function(a, s) {
 
 	            for( var i=0; i<u.length; i++ )
 	            {
-	            	var otherBird = new Bird(app);
-	            	otherBird.createBird(u[i]);
+	            	if( u[i].id != b.id )
+	            	{
+		            	var otherBird = new Bird(app);
+		            	otherBird.createBird(u[i]);
 
-	            	app.model.birds.push(otherBird);
+		            	app.model.birds.push(otherBird);
+	            	}
 	            }
 	        }
 
