@@ -39,8 +39,8 @@ var Control = function(a, s) {
 
             for( var i=0; i<u.length; i++ )
             {
-                var otherBird = new Bird(app);
-                otherBird.createBird(u[0]);
+            	var otherBird = new Bird(app);
+            	otherBird.createBird(u[i]);
             }
 
             // data will looks like this:
