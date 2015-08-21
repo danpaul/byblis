@@ -17,9 +17,13 @@ var Control = function(a, s) {
 
 	socket.on('userUpdatePosition', function (data) {
 	   // data is user object
-	   console.log(data);
+	   // console.log(data);
 		$('#bird-' + data.id).css('left', data.xPosition);
 		$('#bird-' + data.id).css('top', data.yPosition);
+	});
+
+	socket.on('userDisconnect', function (data) {	   
+		$('#bird-' + data.userId).remove();
 	});
 
 	// control.userDisconnect = function()
