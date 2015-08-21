@@ -4,7 +4,7 @@ var Model = function() {
     
     model.mainBird = null;
 
-    birds=[];
+    model.birds=[];
 
     model.bombcount=0;
 

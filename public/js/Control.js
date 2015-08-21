@@ -18,12 +18,14 @@ var Control = function(a, s) {
 	socket.on('userUpdatePosition', function (data) {
 	   // data is user object
 	   console.log(data);
+		$('#bird-' + data.id).css('left', data.xPosition);
+		$('#bird-' + data.id).css('top', data.yPosition);
 	});
 
-	control.userDisconnect = function()
-	{
-		socket.emit('userDisconnect', {userId: userId});
-	}
+	// control.userDisconnect = function()
+	// {
+	// 	socket.emit('userDisconnect', {userId: userId});
+	// }
 	
 	// socket.on('userPlaceBomb', {xPosition: ..., yPosition});
 
@@ -51,6 +53,8 @@ var Control = function(a, s) {
 	            {
 	            	var otherBird = new Bird(app);
 	            	otherBird.createBird(u[i]);
+
+	            	app.model.birds.push(otherBird);
 	            }
 	        }
 
