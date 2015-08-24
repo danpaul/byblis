@@ -1,47 +1,50 @@
+// connects to socket and emits the init event
 $(document).ready(function(){
 
-	var app;
-	// var socket = io.connect('http://45.55.91.118:8080');
-    var socket = io.connect('http://danb.ngrok.io');    
-   
-    var startApp = function() {
-        app = new App(socket);
-        document.addEventListener('keyup', app.keyup, false);
-        document.addEventListener('keydown', app.keydown, false);
-   }
+    var byblis = window.byblis;    
+    var debug = byblis.config.debug;
+    byblis.socket = io.connect(byblis.config.socketUrl);
 
+    byblis.core.addAnimationCallback = function(cb){
+        byblis.animationCallbacks.push(cb);
+    }
 
-// socket.emit('userUpdatePostion', userObject);
+    // init method
+    byblis.socket.on('connect', function (data) {
 
-//  socket.on('connect', function (data) {
-//         // console.log('in connect event');
-//         socket.emit('userInit', function(err, data){
+        if( debug ){
+            console.log('Connected to socket');
+        }
 
-//             if( err ){
-// console.log(4)
-//                 console.log('Error: ', err);
-//                 return;
-//             }
-// console.log(data)
-//         });
-//     });
+        byblis.socket.emit('userInit', function(err, data){
 
+            if( err ){
+                console.log('userInit error: ', err);
+                return;
+            }
 
-   startApp();
+            if( debug ){ console.log('userInit success:', data); }
 
-    setInterval(function(){
+            _.each(data.gameSate.users, function(u){
+                if( data.user.id === u.id ){ byblis.user = u; }
+            });
 
-        _.each(app.model.birds, function(bird){
+            byblis.users = data.gameSate.users;
+            byblis.bombs = data.gameSate.bombs;
+            byblis.trees = data.gameSate.trees;
 
-            // console.log(bird);
+            // init Two.js
+            byblis.two = new Two({
+                width: byblis.settings.canvasWidth,
+                height: byblis.settings.canvasHeight
+            }).appendTo(document.getElementById('byblisCanvas').children[0]);
+            byblis.two.bind('update', function(frameCount){
+                _.each(byblis.animationCallbacks,
+                       function(cb){ cb(byblis.two); });
+            }).play();
 
-        })
-
-    }, 1000);
-
-
-
-// console.log('asdf')
-// console.log(app.model.birds);
-
+            // trigger init complete event
+            $(document).trigger('byblisInitComplete');
+        });
+    });
 });

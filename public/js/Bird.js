@@ -59,6 +59,7 @@ var Bird = function(app) {
     } 
 
     bird.updatePosition = function(d) {
+// console.log('updating');
     	TweenMax.to( figure, 0.3, {rotation:bird.direction, left:bird.xPosition, top:bird.yPosition});
     }
 

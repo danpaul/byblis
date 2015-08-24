@@ -31,9 +31,7 @@ module.exports = function(data){
     this.getUser = function(userId){
         var user = null;
         _.each(gameSate.user, function(u){
-            if(u.id === userId){
-                user = u;
-            }
+            if(u.id === userId){ user = u; }
         });
         return user;
     }
